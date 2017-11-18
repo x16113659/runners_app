@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Runner's Dream Web Shop">
+    <meta name="author" content="Diana Viktor">
+    <%= favicon_link_tag 'favicon.ico' %>
+    
     <title>Runner's Dream Web Shop</title>
     <%= csrf_meta_tags %>
 
@@ -9,23 +17,10 @@
   </head>
 
   <body>
-
-  <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-       <h4 id="logo">Golfstore</h4>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home",   '#' %></li>
-            <li><%= link_to "Help",   '#' %></li>
-            <li><%= link_to "Log in", '#' %></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
     <div class="container">
+      <%= render 'layouts/header' %>
       <%= yield %>
+      <%= render 'layouts/footer' %>
     </div>
-
 	</body>
 </html>
