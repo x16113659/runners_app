@@ -1,10 +1,33 @@
-<div class="center jumbotron">
 <% provide(:title, "Home") %>
-<h1>Home</h1>
-<p>
-  This is the home page for the
-  <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-  bookstore application.
-</p>
+
+<div class="jumbotron">
+	<%= image_tag("welcome.png", alt:"Welcome Logo" class:"img-responsive")%>
+	<blockquote class="blockquote-reverse"><em>Mankind is made for running</em></blockquote>
+	<h1>Runner's Dream</h1>
+	<p class="lead">Everything what a runner might need from beginner to the professional level</p>
+	<p><a class="btn btn-lg btn-success" href="/products" role="button">Search by category</a></p>
 </div>
-<%= image_tag("welcome.jfif", alt:"Welcome Logo")%>
+
+<div class="row marketing">
+	<div class="col-lg-6">
+	  <h4>Products</h4>
+	  <p>The best quality-price ratio, made from most experienced manufacturers. Detailed information, recommendation for all the customers to help to select the best for you.</p>
+
+	  <h4>Choices</h4>
+	  <p>Runner’s Dream Web Shop wants to provide everything (footwear, clothing, spikes, accessories) for you and makes running enjoyable.</p>
+
+	  <h4>Discounts</h4>
+	  <p>If you buy our products above €100, you will get a discount code which is 10% discount from your next purchase.</p>
+	  </div>
+
+	<div class="col-lg-6">
+	  <h4>Purchase products</h4>
+	  <p>Select the prefect size and colour and place the items in your basket. When you are happy with the content of your basket go to checkout.</p>
+
+	  <h4>Payment</h4>
+	  <p>You don’t need to pay when you submit your order, just later when the order will be delivered.</p>
+
+	  <h4>About me</h4>
+	  <p>As an experienced long distance runner I want to help other athletes to provide them quality equipment what I would suggest in order to enjoy running.</p>
+	  </div>
+</div>
