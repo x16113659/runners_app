@@ -1,11 +1,23 @@
-<div class="header clearfix">
-  <nav>
-    <ul class="nav nav-pills pull-right">
+  <div class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills pull-right" style="padding:10px">
       <li role="presentation" class="active"><a href="/home">Home</a></li>
       <li role="presentation"><a href="/registration">Sign In</a></li>
       <li role="presentation"><a href="/profile">My Account</a></li>
+      <li role="presentation"><a href="/basket"><span id="basket">Basket: 0 item (€0.00)</span></a></li>
       <li role="presentation"><a href="/help">Help</a></li>
-    </ul>
-  </nav>
-  <h3 class="text-muted">Runner's Dream Web Shop</h3>
-</div>
+      </ul>
+
+      <form class="navbar-form navbar-right" style="padding: 5px 15px" action="/search" method="post">
+        <div class="input-group">
+          <input type="text" class="form-control" id="keyword" placeholder="Search products...">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </form>
+
+    </nav>
+    <h3 class="text-muted">Runner's Dream Web Shop</h3>
+    <hr>
+  </div>
