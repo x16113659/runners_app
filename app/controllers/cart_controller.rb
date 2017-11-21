@@ -22,14 +22,14 @@ class CartController < ApplicationController
     end
     
     # redirect to the cart display page
-    redirect_to :action => index
+    redirect_to :action => :index
     
   end
   
   def clear
     # set the session variable to nil and redirect
     session[:cart] = nil
-    redirect_to :action => index
+    redirect_to :action => :index
   end
       
 

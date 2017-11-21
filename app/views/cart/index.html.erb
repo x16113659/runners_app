@@ -19,10 +19,10 @@
     <tr>
         <td>
             <div class="image">
-                <%= link_to (image_tag item.image_url, :style => "height:40px"), item %>
+                <%= link_to (image_tag item.picture, :style => "height:40px"), item %>
             </div>
         </td>
-        <td class="title"><%= link_to item.title, item %></td>
+        <td class="title"><%= link_to item.name, item %></td>
         <td class="price"><%=number_to_currency(item.price)%></td>
         <td class="quantity"><%= quantity %></td>
         <td class="price"><%= number_to_currency(quantity * item.price, :unit => "€") %></td>
