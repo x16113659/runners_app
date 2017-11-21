@@ -1,64 +1,39 @@
-<p id="notice"><%= notice %></p>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/items">All Products</a></li>
+        <li><a href="/categories/1">Women Footwear</a></li>
+        <li><a href="/categories/2">Women Clothing</a></li>
+        <li><a href="/categories/3">Women Spikes</a></li>
+        <li><a href="/categories/4">Men Footwear</a></li>
+        <li><a href="/categories/5">Men Clothing</a></li>
+        <li><a href="/categories/6">Men Spikes</a></li>
+        <li><a href="/categories/7">Accessories</a></li>
+        <li><a href="/categories/8">Discounts</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-<p>
-  <strong>Category:</strong>
-  <%= @item.category_id %>
-</p>
+<div class="notice"><%= flash[:notice] %></div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
-
-<p>
-  <strong>Manufacturer:</strong>
-  <%= @item.manufacturer %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-<p>
-  <strong>Colour:</strong>
-  <%= @item.colour %>
-</p>
-
-<p>
-  <strong>Size:</strong>
-  <%= @item.size %>
-</p>
-
-<p>
-  <strong>Discount:</strong>
-  <%= @item.discount %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @item.description %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= @item.picture %>
-</p>
-
-<p>
-  <strong>Popularity:</strong>
-  <%= @item.popularity %>
-</p>
-
-<p>
-  <strong>Stock:</strong>
-  <%= @item.stock %>
-</p>
-
-<p>
-  <strong>Hold:</strong>
-  <%= @item.hold %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<div class="row">
+  <div class="col-md-8">
+    <%= image_tag @item.picture %><br>
+  </div>
+  <div class="col-md-4">
+    <h2><%= @item.manufacturer %></h2>
+    <h1><%= @item.name %></h1>
+    <h2><%= number_to_currency(@item.price, :unit => "€") %></h2>
+    <h4><%= @item.category_id %></h4>
+    <h4>Colour: <%= @item.colour %></h4>
+    <h4>Size: <%= @item.size %></h4>
+    <h4>Discount: <%= @item.discount %>%</h4>
+    <h4>In Stock: <%= @item.stock %></h4>
+    <p><%= @item.description %></p>
+    <%= link_to 'Edit', edit_item_path(@item) %> |
+    <%= link_to 'Back', items_path %>
+  </div>
+</div>

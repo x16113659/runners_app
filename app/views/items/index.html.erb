@@ -1,49 +1,41 @@
-<p id="notice"><%= notice %></p>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/items">All Products</a></li>
+        <li><a href="/categories/1">Women Footwear</a></li>
+        <li><a href="/categories/2">Women Clothing</a></li>
+        <li><a href="/categories/3">Women Spikes</a></li>
+        <li><a href="/categories/4">Men Footwear</a></li>
+        <li><a href="/categories/5">Men Clothing</a></li>
+        <li><a href="/categories/6">Men Spikes</a></li>
+        <li><a href="/categories/7">Accessories</a></li>
+        <li><a href="/categories/8">Discounts</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-<h1>Items</h1>
+<div class="notice"><%= flash[:notice] %></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Name</th>
-      <th>Manufacturer</th>
-      <th>Price</th>
-      <th>Colour</th>
-      <th>Size</th>
-      <th>Discount</th>
-      <th>Description</th>
-      <th>Picture</th>
-      <th>Popularity</th>
-      <th>Stock</th>
-      <th>Hold</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.category_id %></td>
-        <td><%= item.name %></td>
-        <td><%= item.manufacturer %></td>
-        <td><%= item.price %></td>
-        <td><%= item.colour %></td>
-        <td><%= item.size %></td>
-        <td><%= item.discount %></td>
-        <td><%= item.description %></td>
-        <td><%= item.picture %></td>
-        <td><%= item.popularity %></td>
-        <td><%= item.stock %></td>
-        <td><%= item.hold %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+<% @items.each do |item| %>
+  <div class="col-md-4 text-center">
+    <%= link_to (image_tag item.picture, :style => "width:75%"), item %><br>
+    <strong><%= item.manufacturer %></strong><br>
+    <%= link_to item.name, item %><br>
+    <strong><%= number_to_currency(item.price, :unit => "€") %></strong><br>
+    <% if session[:login] == 1 then %>
+      <%= link_to 'Edit', edit_item_path(item) %>
+      <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% else %>
+      <a href="/cart/<%= item.id %>">Add to cart</a>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
+</div>
 
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+<% if session[:login] == 1 then %>
+  <%= link_to 'New Item', new_item_path %>
+<% end %>

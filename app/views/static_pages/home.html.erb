@@ -1,8 +1,8 @@
 <div class="jumbotron text-center">
-	<%= image_tag("welcome.png", alt:"Welcome Logo", class:"img-responsive")%>
+  <%= image_tag("welcome.png", alt:"Welcome Logo", class:"img-responsive")%>
   <h1>Runner's Dream</h1>
   <p class="lead">Everything what a runner might need from beginner to the professional level</p>
-  <p><a class="btn btn-lg btn-success" href="/products" role="button">Search by category</a></p>
+  <p><%= link_to "Search by category", items_path, :class => "btn btn-lg btn-success", :role => "button" %></p>
 </div>
 
 <blockquote class="blockquote-reverse"><em>Mankind is made for running</em></blockquote>
