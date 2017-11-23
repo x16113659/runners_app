@@ -12,7 +12,10 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @categories = Category.all
+    categories = Category.where("id = ? ", @item.category_id)
+    categories.each do |category| 
+      @category = category
+    end
   end
 
   # GET /items/new

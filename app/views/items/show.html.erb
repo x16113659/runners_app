@@ -25,13 +25,13 @@
     <h2><%= @item.manufacturer %></h2>
     <h1><%= @item.name %></h1>
     <h2><%= number_to_currency(@item.price, :unit => "€") %></h2>
-    <h4><%= @item.category_id %></h4>
+    <h4><%= @category.gender %> <%= @category.name %></h4>
     <h4>Colour: <%= @item.colour %></h4>
     <h4>Size: <%= @item.size %></h4>
     <h4>Discount: <%= @item.discount %>%</h4>
     <h4>In Stock: <%= @item.stock %></h4>
     <p><%= @item.description %></p>
-    <% if user_signed_in? %>
+    <% if 1==2 then %>
       <%= link_to 'Edit', edit_item_path(@item) %> |
       <%= link_to 'Back', items_path %>
     <% else %>

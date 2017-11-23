@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/admin' => 'user#admin_login'
   get '/logout' => 'user#logout'
 
+  get '/categories/list/:id' => 'categories#listitems'
+
   get '/cart' => 'cart#index'
   get '/cart/:id' => 'cart#add'
   get '/cart/increase/:id' => 'cart#increase'
