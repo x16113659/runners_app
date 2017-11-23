@@ -4,7 +4,7 @@
   <% @cart.each do |id,quantity| %>
     <% item = Item.find_by_id(id) %>
     <% total_quantity += quantity %>
-    <% total_amount += quantity * item.price %>
+    <% # total_amount += quantity * item.price %>
   <% end %>
 <% end %>
 

@@ -1,46 +1,66 @@
 class CartController < ApplicationController
   
   def add
-    # get the ID of the product
+    # get the Id of the product
     id = params[:id]
     
-    # if the cart is already been created, use the existing cart
-    # else create a bank cart
+    # if the cart is already been created, use existing cart else create a blank cart
     if session[:cart] then
       cart = session[:cart]
-    else 
+    else
       session[:cart] = {}
       cart = session[:cart]
     end
-    
-    # if the product has already been added to the cart, increment the value
-    # else set the value to 1
+
+    # if the product is already added it increments by 1 else product set to 1
     if cart[id] then
       cart[id] = cart[id] + 1
     else
-      cart[id] = 1
-    end
-    
-    # redirect to the cart display page
-    redirect_to :action => :index
-    
-  end
+      cart[id]= 1
+    end  
   
-  def clear
-    # set the session variable to nil and redirect
-    session[:cart] = nil
     redirect_to :action => :index
   end
-      
+
+  def increase
+    add
+  end
+
+  def decrease
+    # get the Id of the product
+    id = params[:id]
+    cart = session[:cart]
+    
+    # if the product is already added it decrease by 1 else remove product
+    cart[id] = cart[id] - 1
+    if cart[id] == 0 then
+      cart.delete id
+    end  
+  
+    redirect_to :action => :index
+  end
 
   def index
-    # if there is a cart, pass it to the page for display
-    # else pass an empty value
+    # passes a cart to display
     if session[:cart] then
       @cart = session[:cart]
-    else 
+    else
       @cart = {}
-    end
-
+    end  
   end
+  
+  def remove
+    id = params[:id]
+    cart = session[:cart]
+    cart.delete id
+
+    redirect_to :action => :index
+  end
+
+  def clear
+    #sets session variable to nil and bring back to index
+    session[:cart] = nil
+    redirect_to :action => :index
+  end 
+
 end

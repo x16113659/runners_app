@@ -1,45 +1,55 @@
-<h1>Your Cart</h1>
+<h1>Shopping Basket</h1>
+
+<% total_price = 0 %>
+<% total_quantity = 0 %>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-3"></th>
+        <th class="col-md-4">Item</th>
+        <th class="col-md-1">Price</th>
+        <th class="col-md-2">Quantity</th>
+        <th class="col-md-1">Total</th>
+        <th class="col-md-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+
 <% if @cart.empty? %>
-    <p> Your cart is empty</p>
-<%end%>
+        <tr>
+          <td colspan="6" align="center"><em>Your shopping basket is empty</em></td>
+        </tr>
+<% end %>
 
-<% total = 0 %>
+<% @cart.each do |id,quantity| %>
+  <% item = Item.find_by_id(id) %>
+        <tr>
+            <td><%= link_to (image_tag item.picture, :style => "width:100%"), item %></td>
+            <td><strong><%= link_to item.name, item %></strong></td>
+            <td align="right"><%= number_to_currency(item.price, :unit => "€") %></td>
+            <td align="right">
+                <div class="input-group">
+                  <a href="/cart/increase/<%= item.id %>" class="input-group-addon glyphicon glyphicon-plus"></a>
+                  <input type="text" class="form-control" value="<%= quantity %>" disabled>
+                  <a href="/cart/decrease/<%= item.id %>" class="input-group-addon glyphicon glyphicon-minus"></a>
+                </div>
+            </td>
+            <td align="right"><%= number_to_currency(quantity * item.price, :unit => "€") %></td>
+            <td><a href="/cart/remove/<%= item.id %>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+        </tr>
+  <% total_price += quantity * item.price %>
+  <% total_quantity += quantity %>
+<% end %>
+    </tbody>
+</table>
 
-<table class="cart">
-    <tr>
-        <td class="legend"></td>
-        <td class="legend">Item</td>
-        <td class="legend">Price</td>
-        <td class="legend">Qty</td>
-        <td class="legend">Total</td>
-    </tr>
-    
-    <% @cart.each do |id,quantity| %>
-    <% item = Item.find_by_id(id) %>
-    <tr>
-        <td>
-            <div class="image">
-                <%= link_to (image_tag item.picture, :style => "height:40px"), item %>
-            </div>
-        </td>
-        <td class="title"><%= link_to item.name, item %></td>
-        <td class="price"><%=number_to_currency(item.price)%></td>
-        <td class="quantity"><%= quantity %></td>
-        <td class="price"><%= number_to_currency(quantity * item.price, :unit => "€") %></td>
-    </tr>
-    <% total += quantity * item.price%>
-    <% end %>
-    <tr>
-        <td colspan="4">
-            <div class="total">Total:</div>
-        </td>
-        <td>
-            <div class="price">
-                <%= number_to_currency(total, :unit => "Eur")%>
-            </div>
-        </td>
-    </tr>
-    </table>
-    <p>
-        <%= link_to "Continue Shopping", :controller => :items %>
-    </p>
+<div class="row">
+    <div class="col-md-6" style="margin-top: 40px">
+        <%= link_to "Continue Shopping", items_path, :class => "btn btn-lg btn-success", :role => "button" %>
+    </div>
+    <div class="col-md-6 text-right">
+        <h4>Total (<%= total_quantity %> items): <%= number_to_currency(total_price, :unit => "€") %></h4>
+        <%= link_to "Proceed to checkout", cart_path, :class => "btn btn-lg btn-success", :role => "button" %>
+    </div>
+</div>

@@ -17,8 +17,6 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="notice"><%= flash[:notice] %></div>
-
 <div class="row">
   <div class="col-md-8">
     <%= image_tag @item.picture %><br>
@@ -33,7 +31,12 @@
     <h4>Discount: <%= @item.discount %>%</h4>
     <h4>In Stock: <%= @item.stock %></h4>
     <p><%= @item.description %></p>
-    <%= link_to 'Edit', edit_item_path(@item) %> |
-    <%= link_to 'Back', items_path %>
+    <% if session[:login] == 1 then %>
+      <%= link_to 'Edit', edit_item_path(@item) %> |
+      <%= link_to 'Back', items_path %>
+    <% else %>
+      <%= link_to "Add to basket", "/cart/" + @item.id.to_s, :class => "btn btn-success", :role => "button" %>
+      <%= link_to "Back to catalog", items_path, :class => "btn btn-success", :role => "button" %>
+    <% end %>
   </div>
 </div>

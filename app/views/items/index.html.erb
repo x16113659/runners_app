@@ -17,8 +17,6 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="notice"><%= flash[:notice] %></div>
-
 <div class="row">
 <% @items.each do |item| %>
   <div class="col-md-4 text-center">
@@ -30,7 +28,7 @@
       <%= link_to 'Edit', edit_item_path(item) %>
       <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
-      <a href="/cart/<%= item.id %>">Add to cart</a>
+      <%= link_to "Add to basket", "/cart/" + item.id.to_s, :class => "btn btn-success", :role => "button" %>
     <% end %>
   </div>
 <% end %>

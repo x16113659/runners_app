@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   get '/logout' => 'user#logout'
 
   get '/cart' => 'cart#index'
-  get '/cart/clear' => 'cart#clear'
   get '/cart/:id' => 'cart#add'
+  get '/cart/increase/:id' => 'cart#increase'
+  get '/cart/decrease/:id' => 'cart#decrease'
+  get '/cart/remove/:id' => 'cart#remove'
 
   root 'static_pages#home'
 
