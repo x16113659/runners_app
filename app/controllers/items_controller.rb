@@ -1,15 +1,18 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
+
   # GET /items
   # GET /items.json
   def index
     @items = Item.all
+    @categories = Category.all
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
+    @categories = Category.all
   end
 
   # GET /items/new

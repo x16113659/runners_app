@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'cart/index'
   get 'site/about'
   
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   get '/cart/remove/:id' => 'cart#remove'
 
   root 'static_pages#home'
+  root :to => 'site#home'
 
   resources :categories
   resources :items

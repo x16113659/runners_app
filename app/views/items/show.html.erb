@@ -31,7 +31,7 @@
     <h4>Discount: <%= @item.discount %>%</h4>
     <h4>In Stock: <%= @item.stock %></h4>
     <p><%= @item.description %></p>
-    <% if session[:login] == 1 then %>
+    <% if user_signed_in? %>
       <%= link_to 'Edit', edit_item_path(@item) %> |
       <%= link_to 'Back', items_path %>
     <% else %>
