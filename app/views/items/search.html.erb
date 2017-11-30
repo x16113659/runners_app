@@ -1,5 +1,9 @@
 <%= render 'items/header' %>
 
+<% if @items.empty? %>
+  <p align="center"><em>No result found</em></p>
+<% end %>
+
 <%= render 'items/catalog' %>
 
 <% if current_user.try(:admin?) %>

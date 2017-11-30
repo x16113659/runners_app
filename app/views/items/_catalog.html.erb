@@ -5,11 +5,11 @@
     <strong><%= item.manufacturer %></strong><br>
     <%= link_to item.name, item %><br>
     <% if item.discount > 0 then %>
-      <s><%= number_to_currency(item.price, :unit => "€") %></s>
-      <mark>Discount <%= number_to_percentage(-item.discount * 100, precision: 0) %></mark>
-      <strong><%= number_to_currency(item.price * (1 - item.discount), :unit => "€", precision: 0) %></strong><br>
+      <s><%= number_to_currency(item.price, :unit => "€", precision: 2) %></s>
+      <mark>Discount <%= number_to_percentage(-item.discount * 100, precision: 2) %></mark>
+      <strong><%= number_to_currency(item.price * (1 - item.discount), :unit => "€", precision: 2) %></strong><br>
     <% else %>
-      <strong><%= number_to_currency(item.price, :unit => "€") %></strong><br>
+      <strong><%= number_to_currency(item.price, :unit => "€", precision: 2) %></strong><br>
     <% end %>
     <% if current_user.try(:admin?) %>
       <%= link_to 'Edit', edit_item_path(item), :class => "btn btn-danger", :role => "button" %>

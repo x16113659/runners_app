@@ -25,9 +25,9 @@
 <% @cart.each do |id,quantity| %>
   <% item = Item.find_by_id(id) %>
         <tr>
-            <td><%= link_to (image_tag item.picture, :style => "width:100%"), item %></td>
+            <td><%= link_to (image_tag item.picture, :style => "width:50%"), item %></td>
             <td><strong><%= link_to item.name, item %></strong></td>
-            <td align="right"><%= number_to_currency(item.price, :unit => "€") %></td>
+            <td align="right"><%= number_to_currency(item.price * (1 - item.discount), :unit => "€", precision: 2) %></td>
             <td align="right">
                 <div class="input-group">
                   <a href="/cart/increase/<%= item.id %>" class="input-group-addon glyphicon glyphicon-plus"></a>
@@ -35,21 +35,21 @@
                   <a href="/cart/decrease/<%= item.id %>" class="input-group-addon glyphicon glyphicon-minus"></a>
                 </div>
             </td>
-            <td align="right"><%= number_to_currency(quantity * item.price, :unit => "€") %></td>
+            <td align="right"><%= number_to_currency(quantity * item.price * (1 - item.discount), :unit => "€", precision: 2) %></td>
             <td><a href="/cart/remove/<%= item.id %>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
         </tr>
-  <% total_price += quantity * item.price %>
+  <% total_price += quantity * item.price * (1 - item.discount) %>
   <% total_quantity += quantity %>
 <% end %>
     </tbody>
 </table>
 
 <div class="row">
-    <div class="col-md-6" style="margin-top: 40px">
-        <%= link_to "Continue Shopping", items_path, :class => "btn btn-lg btn-success", :role => "button" %>
+    <div class="col-md-12 text-right">
+        <h4>Total (<%= total_quantity %> items): <%= number_to_currency(total_price, :unit => "€", precision: 2) %></h4>
     </div>
-    <div class="col-md-6 text-right">
-        <h4>Total (<%= total_quantity %> items): <%= number_to_currency(total_price, :unit => "€") %></h4>
-        <%= link_to "Proceed to checkout", cart_path, :class => "btn btn-lg btn-success", :role => "button" %>
+    <div class="col-md-6">
+        <%= link_to "Continue Shopping", items_path, :class => "btn btn-success", :role => "button" %>
+        <%= link_to "Proceed to checkout", cart_path, :class => "btn btn-success", :role => "button" %>
     </div>
 </div>
