@@ -12,14 +12,6 @@ class CategoriesController < ApplicationController
   def show
   end
 
-  # GET /categories/list/1
-  # GET /categories/list/1.json
-  def listitems
-    id = params[:id]
-    @items = Item.where("category_id = ? ", id)
-    @categories = Category.all
-  end
-
   # GET /categories/new
   def new
     @category = Category.new

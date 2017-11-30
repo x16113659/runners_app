@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
   get 'cart/index'
 
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
 
-  get '/categories/list/:id' => 'categories#listitems'
+  get '/items/show/:id' => 'items#show'
+  get '/items/category/:id' => 'items#categoryfilter'
+  post '/items/search' => 'items#search'
+  get '/items/discount' => 'items#discountfilter'
 
   get '/cart' => 'cart#index'
   get '/cart/:id' => 'cart#add'

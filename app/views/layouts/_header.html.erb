@@ -23,13 +23,15 @@
         <% end %>
       </li>
       <li role="presentation"><%= link_to "My Account", edit_user_registration_path %></li>
-      <li role="presentation"><%= link_to "Basket: " + total_quantity.to_s + " item (" + number_to_currency(total_amount, :unit => "€") + ")", cart_path, :id => "basket" %></li>
+      <% if not current_user.try(:admin?) %>
+        <li role="presentation"><%= link_to "Basket: " + total_quantity.to_s + " item (" + number_to_currency(total_amount, :unit => "€") + ")", cart_path, :id => "basket" %></li>
+      <% end %>
       <li role="presentation"><%= link_to "Help", help_path %></li>
       </ul>
 
-      <form class="navbar-form navbar-right" style="padding: 5px 15px" action="/search" method="post">
+      <form class="navbar-form navbar-right" style="padding: 5px 15px" id="searchform" action="/items/search" method="post">
         <div class="input-group">
-          <input type="text" class="form-control" id="keyword" placeholder="Search products...">
+          <input type="text" class="form-control" name="keyword" value="<%= @keyword %>" placeholder="Search products...">
           <div class="input-group-btn">
             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </div>

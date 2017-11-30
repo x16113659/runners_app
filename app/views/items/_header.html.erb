@@ -1,0 +1,12 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+      <ul class="nav navbar-nav">
+        <li><a href="/items">All Products</a></li>
+        <% @categories.each do |category| %>
+          <li><a href="/items/category/<%= category.id %>"><%= category.gender %> <%= category.name %></a></li>
+        <% end %>
+        <li><a href="/items/discount">Discounts</a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>

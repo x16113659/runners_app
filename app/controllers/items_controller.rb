@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :verify_authenticity_token
 
   # GET /items
   # GET /items.json
@@ -12,10 +12,33 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @item = Item.find(params[:id])
+    @categories = Category.all
     categories = Category.where("id = ? ", @item.category_id)
     categories.each do |category| 
       @category = category
     end
+  end
+
+  # GET /items/categoryfilter/1
+  # GET /items/categoryfilter/1.json
+  def categoryfilter
+    category_id = params[:id]
+    @items = Item.where("category_id = ? ", category_id)
+    @categories = Category.all
+  end
+
+  # GET /items/discount
+  def discountfilter
+    @items = Item.where("discount > 0")
+    @categories = Category.all
+  end
+
+  # POST /items/search
+  def search
+    @keyword = params[:keyword]
+    @items = Item.where("name LIKE ? OR description LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+    @categories = Category.all
   end
 
   # GET /items/new

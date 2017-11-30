@@ -1,14 +1,4 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/items">All Products</a></li>
-        <% @categories.each do |category| %>
-          <li><a href="/categories/list/<%= category.id %>"><%= category.gender %> <%= category.name %></a></li>
-        <% end %>
-      </ul>
-  </div><!-- /.container-fluid -->
-</nav>
+<%= render 'items/header' %>
 
 <div class="row">
 <% @items.each do |item| %>
