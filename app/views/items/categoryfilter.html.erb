@@ -1,21 +1,6 @@
 <%= render 'items/header' %>
 
-<div class="row">
-<% @items.each do |item| %>
-  <div class="col-md-4 text-center">
-    <%= link_to (image_tag item.picture, :style => "width:75%"), item %><br>
-    <strong><%= item.manufacturer %></strong><br>
-    <%= link_to item.name, item %><br>
-    <strong><%= number_to_currency(item.price, :unit => "€") %></strong><br>
-    <% if 1==2 then %>
-      <%= link_to 'Edit', edit_item_path(item) %>
-      <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% else %>
-      <%= link_to "Add to basket", "/cart/" + item.id.to_s, :class => "btn btn-success", :role => "button" %>
-    <% end %>
-  </div>
-<% end %>
-</div>
+<%= render 'items/catalog' %>
 
 <% if session[:login] == 1 then %>
   <%= link_to 'New Item', new_item_path %>
