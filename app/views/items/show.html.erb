@@ -31,9 +31,9 @@
     <h4>Discount: <%= @item.discount %>%</h4>
     <h4>In Stock: <%= @item.stock %></h4>
     <p><%= @item.description %></p>
-    <% if 1==2 then %>
-      <%= link_to 'Edit', edit_item_path(@item) %> |
-      <%= link_to 'Back', items_path %>
+    <% if current_user.try(:admin?) %>
+      <%= link_to 'Edit', edit_item_path(@item), :class => "btn btn-danger", :role => "button" %>
+      <%= link_to 'Back', items_path, :class => "btn btn-danger", :role => "button" %>
     <% else %>
       <%= link_to "Add to basket", "/cart/" + @item.id.to_s, :class => "btn btn-success", :role => "button" %>
       <%= link_to "Back to catalog", items_path, :class => "btn btn-success", :role => "button" %>

@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @category.gender %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<% if current_user.try(:admin?) %>
+  <p id="notice"><%= notice %></p>
+  
+  <p>
+    <strong>Name:</strong>
+    <%= @category.name %>
+  </p>
+  
+  <p>
+    <strong>Gender:</strong>
+    <%= @category.gender %>
+  </p>
+  
+  <%= link_to 'Edit', edit_category_path(@category), :class => "btn btn-danger", :role => "button" %>
+  <%= link_to 'Back', categories_path, :class => "btn btn-danger", :role => "button" %>
+<% end %>

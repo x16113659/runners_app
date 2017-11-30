@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   get 'cart/index'
   get 'site/about'
@@ -6,8 +7,6 @@ Rails.application.routes.draw do
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
-  get '/admin' => 'user#admin_login'
-  get '/logout' => 'user#logout'
 
   get '/categories/list/:id' => 'categories#listitems'
 
@@ -16,6 +15,8 @@ Rails.application.routes.draw do
   get '/cart/increase/:id' => 'cart#increase'
   get '/cart/decrease/:id' => 'cart#decrease'
   get '/cart/remove/:id' => 'cart#remove'
+
+  get '/categories' => 'categories#index'
 
   root 'static_pages#home'
   root :to => 'site#home'
