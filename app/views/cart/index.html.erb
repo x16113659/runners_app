@@ -50,6 +50,6 @@
     </div>
     <div class="col-md-6">
         <%= link_to "Continue Shopping", items_path, :class => "btn btn-success", :role => "button" %>
-        <%= link_to "Proceed to checkout", cart_path, :class => "btn btn-success", :role => "button" %>
+        <%= link_to "Proceed to checkout", {:controller => "cart", :action => "createOrder"}, :class => "btn btn-success", :role => "button" %>
     </div>
 </div>

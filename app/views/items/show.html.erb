@@ -11,7 +11,7 @@
     <h4><%= @category.gender %> <%= @category.name %></h4>
     <h4>Colour: <%= @item.colour %></h4>
     <h4>Size: <%= @item.size %></h4>
-    <h4>Discount: <%= @item.discount %>%</h4>
+    <h4>Discount: <%= number_to_percentage(@item.discount * 100, precision: 2) %></h4>
     <h4>In Stock: <%= @item.stock %></h4>
     <p><%= @item.description %></p>
     <% if current_user.try(:admin?) %>

@@ -1,0 +1,72 @@
+<h2>Thank You</h2>
+
+<p>You have just placed an order</p>
+
+<table>
+    
+    <thead>
+        <tr>
+        <th>Order Reference</th>
+        
+        </tr>
+    </thead>
+    
+    <tbody>
+        
+        <%= @orders.id %>
+        <tr>
+            
+           
+        </tr>
+        
+        
+        
+    </tbody>
+    
+</table>
+
+
+<table>
+    <thead>
+        <tr>Items(s)</tr>
+        
+    </thead>
+    
+    <tbody>
+        <% @total = 0 %>
+        <% @orderitems.each do |id, quantity| %>
+        
+        <tr>
+            <% item = Orderitem.find_by_id(id) %>
+            
+            
+            <td><%= item.name %></td>
+            <td><%= item.quantity %></td>
+            <td><%= number_to_currency(item.price, :unit=> "€" )%></td>
+            <td><%= number_to_currency(item.quantity * item.price, :unit=> "€") %></td>
+        </tr>
+        
+        <% totx = (item.quantity * item.price) %>
+        
+        <% @total += totx %>
+        
+        <% end %>
+        
+        <% shipping = 30 %>
+        <% @overall = shipping + @total %>
+        <tr>
+            <td>Order Total &euro;<%= @total %></td>
+            <td>Shipping &euro;30</td>
+            <td>You will pay &euro; <%= @overall %></td>
+            
+        </tr>
+        
+        <tr>
+            
+            <td><a href="/paid">Submit Payment</a></td>
+            
+        </tr>
+    </tbody>
+    
+    
+    

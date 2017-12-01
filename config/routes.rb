@@ -1,8 +1,25 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  get 'orderitems/index'
+
+  get 'orderitems/show'
+
+  get 'orderitems/new'
+
+  get 'orderitems/edit'
+
+  resources :orders do 
+    resources :orderitems 
+  end
+  
+  devise_for :users do 
+    resources :orders 
+  end
 
   get 'cart/index'
+  get '/checkout' => 'cart#createOrder'
+
+  get '/paid' => 'static_pages#paid'
 
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
