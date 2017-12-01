@@ -1,44 +1,46 @@
-<p id="notice"><%= notice %></p>
+<h1>Order details</h1>
 
-<p>
-  <strong>Order date:</strong>
-  <%= @order.date %>
-</p>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Order date</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.date.strftime("%F %T") %></p>
+    </div>
+  </div>
+<% if current_user.try(:admin?) %>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Customer email</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.user.email %></p>
+    </div>
+  </div>
+<% end %>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Order status</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.status %></p>
+    </div>
+  </div>
+</form>
 
-<p>
-  <strong>User:</strong>
-  <%= @order.user %>
-</p>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-6">Product name</th>
+        <th class="col-md-2">Price</th>
+        <th class="col-md-2">Quantity</th>
+        <th class="col-md-2">Total</th>
+      </tr>
+    </thead>
+    <tbody>
 
-<p>
-  <strong>Status:</strong>
-  <%= @order.status %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
-
-
-<table> 
-
-<thead>
-  
-  <tr>
-    <th>Order Date</th>
-    <th>User</th>
-    
-  </tr>
-  
-  <tbody>
     <% @orderitems.each do |orderitem| %>
-    
-    <tr>
-      <td><%= orderitem.created_at %></td>
-      <td><%= orderitem.name %></td>
-      <td><%= orderitem.order_id %></td>
-      
-    </tr>
-    
+      <tr>
+        <td><%= orderitem.name %></td>
+        <td><%= number_to_currency(orderitem.price, :unit => "€", precision: 2) %></td>
+        <td><%= orderitem.quantity %></td>
+        <td><%= number_to_currency(orderitem.quantity * orderitem.price, :unit => "€", precision: 2) %></td>
+      </tr>
     <% end %>
   </tbody>
   
@@ -46,3 +48,11 @@
 
 
 </table>
+
+<% if current_user.try(:admin?) %>
+  <%= link_to 'Edit order', edit_order_path(@order), :class => "btn btn-danger", :role => "button" %>
+  <%= link_to 'Back to orders', orders_path, :class => "btn btn-danger", :role => "button" %>
+<% else %>
+  <%= link_to 'Back to my orders', orders_path, :class => "btn btn-success", :role => "button" %>
+<% end %>
+

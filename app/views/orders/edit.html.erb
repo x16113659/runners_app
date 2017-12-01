@@ -1,6 +1,10 @@
+<% if current_user.try(:admin?) %>
+
 <h1>Editing Order</h1>
 
 <%= render 'form', order: @order %>
 
-<%= link_to 'Show', @order %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Show', @order, :class => "btn btn-danger", :role => "button" %>
+<%= link_to 'Back', orders_path, :class => "btn btn-danger", :role => "button" %> 
+
+<% end %>
