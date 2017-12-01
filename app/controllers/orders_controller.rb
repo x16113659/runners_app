@@ -63,6 +63,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  # GET /orders/pay/1
+  # GET /orders/pay/1.json
+  def confirmPayment
+    @order = Order.find(params[:id])
+    @order.status = "Paid"
+    @order.save
+    @orderitems = Orderitem.where(order_id: params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

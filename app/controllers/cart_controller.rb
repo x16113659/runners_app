@@ -80,8 +80,8 @@ class CartController < ApplicationController
       @orderitem.save
     end
     
-    @orders = Order.last
-    @orderitems = Orderitem.where(order_id: Order.last)
+    # @order = Order.last
+    @orderitems = Orderitem.where(order_id: @order.id)
 
     # Empty the cart
     session[:cart] = nil

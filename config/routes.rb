@@ -18,16 +18,15 @@ Rails.application.routes.draw do
 
   get 'cart/index'
   get '/checkout' => 'cart#createOrder'
-
-  get '/paid' => 'static_pages#paid'
+  get '/orders/pay/:id' => 'orders#confirmPayment'
 
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
 
   get '/items/show/:id' => 'items#show'
   get '/items/category/:id' => 'items#categoryfilter'
-  post '/items/search' => 'items#search'
   get '/items/discount' => 'items#discountfilter'
+  post '/items/search' => 'items#search'
 
   get '/cart' => 'cart#index'
   get '/cart/:id' => 'cart#add'

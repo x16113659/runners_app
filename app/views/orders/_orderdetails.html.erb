@@ -1,0 +1,78 @@
+<h1>Order details</h1>
+
+<form class="form-horizontal" style="background-color: lightgrey">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Order Id</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.id %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Order date</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.date.strftime("%F %T") %></p>
+    </div>
+  </div>
+<% if current_user.try(:admin?) %>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Customer email</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.user.email %></p>
+    </div>
+  </div>
+<% end %>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Order status</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><%= @order.status %></p>
+    </div>
+  </div>
+</form>
+
+<% total_price = 0 %>
+<% total_quantity = 0 %>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-6">Product name</th>
+        <th class="col-md-2">Price</th>
+        <th class="col-md-2">Quantity</th>
+        <th class="col-md-2">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @orderitems.each do |orderitem| %>
+      <tr>
+        <td><%= orderitem.name %></td>
+        <td><%= number_to_currency(orderitem.price, :unit => "€", precision: 2) %></td>
+        <td><%= orderitem.quantity %></td>
+        <td><%= number_to_currency(orderitem.quantity * orderitem.price, :unit => "€", precision: 2) %></td>
+      </tr>
+      <% total_price += orderitem.quantity * orderitem.price %>
+      <% total_quantity += orderitem.quantity %>
+    <% end %>
+
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <h4>Total (<%= total_quantity %> items): <%= number_to_currency(total_price, :unit => "€", precision: 2) %></h4>
+        <h4>+ Shipping fee €12.00</h4>
+        <h4>You will pay <%= number_to_currency(total_price + 12, :unit => "€", precision: 2) %></h4>
+
+    </div>
+    <div class="col-md-6">
+      <% if current_user.try(:admin?) %>
+        <%= link_to 'Edit order', edit_order_path(@order), :class => "btn btn-danger", :role => "button" %>
+        <%= link_to 'Back to orders', orders_path, :class => "btn btn-danger", :role => "button" %>
+      <% else %>
+        <%= link_to 'Back to my orders', orders_path, :class => "btn btn-success", :role => "button" %>
+        <% if @order.status == "Pending" then %>
+          <%= link_to 'Pay this order', "/orders/pay/" + @order.id.to_s, :class => "btn btn-success", :role => "button" %>
+        <% end %>
+      <% end %>
+    </div>
+</div>
